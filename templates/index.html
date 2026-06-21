@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prompt Video Site</title>
+</head>
+<body>
+  <h1>Prompt Video Site</h1>
+  <p>Type a prompt and generate a video.</p>
+
+  {% if error %}
+    <p style="color:red;"><strong>{{ error }}</strong></p>
+  {% endif %}
+
+  {% if video_url %}
+    <h2>Video ready</h2>
+    <p><a href="{{ video_url }}" target="_blank">Open generated video</a></p>
+    <video width="320" controls>
+      <source src="{{ video_url }}" type="video/mp4">
+    </video>
+  {% endif %}
+
+  <form action="/generate" method="post">
+    <label>Prompt:</label><br>
+    <textarea name="prompt" rows="6" cols="40" required>{{ prompt or "" }}</textarea><br><br>
+
+    <button type="submit">Generate Video</button>
+  </form>
+</body>
+</html>
